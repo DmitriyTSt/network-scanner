@@ -1,7 +1,13 @@
 package ru.dmitriyt.networkscanner.data.model
 
-class NetInterface(
+sealed class NetInterface(
     val name: String,
-    val ipAddress: String,
-    val prefixLength: Short,
-)
+) {
+    class Connected(
+        name: String,
+        val ipAddress: String,
+        val prefixLength: Short,
+    ) : NetInterface(name)
+
+    class Disconnected(name: String) : NetInterface(name)
+}

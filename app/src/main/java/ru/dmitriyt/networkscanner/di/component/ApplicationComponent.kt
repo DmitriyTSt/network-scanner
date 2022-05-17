@@ -6,7 +6,9 @@ import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import ru.dmitriyt.networkscanner.di.module.ActivityModule
 import ru.dmitriyt.networkscanner.di.module.ApplicationModule
+import ru.dmitriyt.networkscanner.di.module.CoroutineModule
 import ru.dmitriyt.networkscanner.di.module.FragmentModule
+import ru.dmitriyt.networkscanner.di.module.RepositoryModule
 import ru.dmitriyt.networkscanner.di.module.ViewModelModule
 import ru.dmitriyt.networkscanner.presentation.NetworkScannerApplication
 import javax.inject.Singleton
@@ -19,6 +21,8 @@ import javax.inject.Singleton
         ActivityModule::class,
         FragmentModule::class,
         ViewModelModule::class,
+        CoroutineModule::class,
+        RepositoryModule::class,
     ]
 )
 interface ApplicationComponent : AndroidInjector<NetworkScannerApplication> {

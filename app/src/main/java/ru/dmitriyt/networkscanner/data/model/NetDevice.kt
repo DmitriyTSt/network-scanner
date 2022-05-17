@@ -1,5 +1,6 @@
 package ru.dmitriyt.networkscanner.data.model
 
 class NetDevice(
-    val
+    val host: String,
+    val hostName: String,
 )
