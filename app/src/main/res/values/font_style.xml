@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Font">
+        <item name="android:textColor">?colorOnSurface</item>
+    </style>
+
+    <style name="Font.Heading0">
+        <item name="android:textSize">@dimen/text_size_heading_0</item>
+    </style>
+
+    <style name="Font.Heading0.Bold">
+        <item name="fontWeight">700</item>
+    </style>
+
+    <style name="Font.Heading1">
+        <item name="android:textSize">@dimen/text_size_heading_1</item>
+    </style>
+
+    <style name="Font.Heading1.Bold">
+        <item name="fontWeight">700</item>
+    </style>
+
+    <style name="Font.Heading2">
+        <item name="android:textSize">@dimen/text_size_heading_2</item>
+    </style>
+
+    <style name="Font.Heading2.Bold">
+        <item name="fontWeight">700</item>
+    </style>
+
+    <style name="Font.Heading3">
+        <item name="android:textSize">@dimen/text_size_heading_3</item>
+    </style>
+
+    <style name="Font.Heading3.Medium">
+        <item name="fontWeight">500</item>
+    </style>
+
+    <style name="Font.Body1">
+        <item name="android:textSize">@dimen/text_size_body_1</item>
+    </style>
+
+    <style name="Font.Body1.Regular" />
+
+    <style name="Font.Body2">
+        <item name="android:textSize">@dimen/text_size_body_2</item>
+    </style>
+
+    <style name="Font.Body2.Regular" />
+
+    <style name="Font.Body2.Medium">
+        <item name="fontWeight">500</item>
+    </style>
+
+    <style name="Font.Caption1">
+        <item name="android:textSize">@dimen/text_size_caption_1</item>
+    </style>
+
+    <style name="Font.Caption1.Regular" />
+</resources>

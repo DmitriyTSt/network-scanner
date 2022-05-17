@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">NetworkScanner</string>
+
+    <string name="error_something_wrong_title">Что-то пошло не так</string>
+    <string name="error_something_wrong_description">Попробуйте обновить страницу</string>
+    <string name="error_retry">Повторить</string>
+    <string name="network_interfaces_title">Сетевые интерфейсы</string>
+    <string name="net_interface_not_connected_status">Не подключен</string>
 </resources>
