@@ -40,6 +40,9 @@ class NetworkFragment : BaseFragment(R.layout.fragment_network) {
 
     override fun setupLayout(savedInstanceState: Bundle?) = with(binding) {
         toolbar.fitTopInsetsWithPadding()
+        toolbar.setNavigationOnClickListener {
+            viewModel.navigateBack()
+        }
         setupHeader()
         setupRecyclerView()
     }
