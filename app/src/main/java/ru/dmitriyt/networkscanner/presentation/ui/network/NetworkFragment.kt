@@ -2,6 +2,7 @@ package ru.dmitriyt.networkscanner.presentation.ui.network
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import by.kirich1409.viewbindingdelegate.viewBinding
 import ru.dmitriyt.networkscanner.R
 import ru.dmitriyt.networkscanner.data.model.NetInterface
@@ -48,11 +49,15 @@ class NetworkFragment : BaseFragment(R.layout.fragment_network) {
 
     override fun onBindViewModel() = with(viewModel) {
         observeNavigationCommands(this)
-        devicesLiveData.observe { state ->
+        devicesStateLiveData.observe { state ->
             binding.stateViewFlipper.setState(state)
-            state.doOnSuccess { devices ->
-                adapter.submitList(devices)
-            }
+        }
+        devicesDataLiveData.observe { devices ->
+            adapter.submitList(devices)
+        }
+        scanStateLiveEvent.observe { state ->
+            binding.toolbar.menu.findItem(R.id.refresh).isVisible = !state.isLoading
+            binding.progressBarScan.isVisible = state.isLoading
         }
     }
 
