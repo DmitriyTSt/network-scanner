@@ -20,13 +20,26 @@ class NetworkMapper @Inject constructor(
                 name = netInterface.displayName,
                 ipAddress = ipv4Address,
                 prefixLength = interfaceAddressIpv4.networkPrefixLength,
+                networkIpAddress = uIntToIpv4(
+                    getNetworkFromAddressAndMask(
+                        ipv4Address,
+                        interfaceAddressIpv4.networkPrefixLength,
+                    )
+                ),
             )
         } else {
             NetInterface.Disconnected(name = netInterface.displayName)
         }
     }
 
-    fun intToIpv4(address: UInt): String {
+    /**
+     * Получить сеть по любому адресу и маске
+     */
+    private fun getNetworkFromAddressAndMask(ipv4Address: String, prefixLength: Short): UInt {
+        return ipv4ToUInt(ipv4Address) and prefixLengthToInt(prefixLength)
+    }
+
+    fun uIntToIpv4(address: UInt): String {
         return address.toString(2)
             .padStart(32, '0')
             .chunked(8)

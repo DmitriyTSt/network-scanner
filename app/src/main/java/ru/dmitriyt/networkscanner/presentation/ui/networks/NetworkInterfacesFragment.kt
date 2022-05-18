@@ -44,9 +44,7 @@ class NetworkInterfacesFragment : BaseFragment(R.layout.fragment_network_interfa
     }
 
     private fun setupRecyclerView() = with(binding) {
-        adapter.onItemClick = { netInterface ->
-
-        }
+        adapter.onItemClick = viewModel::openNetwork
         recyclerView.adapter = adapter
         recyclerView.addLinearSpaceItemDecoration()
     }

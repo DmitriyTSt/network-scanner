@@ -6,7 +6,7 @@ import ru.dmitriyt.networkscanner.presentation.ui.base.BaseAdapter
 import javax.inject.Inject
 
 class NetInterfacesAdapter @Inject constructor() : BaseAdapter<NetInterface, NetInterfaceViewHolder>() {
-    lateinit var onItemClick: (NetInterface) -> Unit
+    lateinit var onItemClick: (NetInterface.Connected) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NetInterfaceViewHolder {
         return NetInterfaceViewHolder(parent, onItemClick)

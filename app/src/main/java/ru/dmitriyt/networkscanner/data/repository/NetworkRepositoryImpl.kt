@@ -24,7 +24,7 @@ class NetworkRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getDevices(netInterface: NetInterface.Connected, timeout: Int): List<NetDevice> {
-        return getDevices(getNetwork(netInterface.ipAddress, netInterface.prefixLength), netInterface.prefixLength, timeout)
+        return getDevices(mapper.ipv4ToUInt(netInterface.networkIpAddress), netInterface.prefixLength, timeout)
     }
 
     private fun getNetworkInterfacesList(): List<NetworkInterface> {
@@ -44,13 +44,6 @@ class NetworkRepositoryImpl @Inject constructor(
     }
 
     /**
-     * Получить сеть по любому адресу и маске
-     */
-    private fun getNetwork(ipv4Address: String, prefixLength: Short): UInt {
-        return mapper.ipv4ToUInt(ipv4Address) and mapper.prefixLengthToInt(prefixLength)
-    }
-
-    /**
      * Получить доступные девайсы в сети
      */
     private suspend fun getDevices(
@@ -62,7 +55,7 @@ class NetworkRepositoryImpl @Inject constructor(
 
         IntRange(0, deviceCount - 1).map { i ->
             val addressUInt = (network + i.toUInt())
-            val host = mapper.intToIpv4(addressUInt)
+            val host = mapper.uIntToIpv4(addressUInt)
             Timber.d("CHECK $host")
 
             if (i == 0 || i == deviceCount - 1) return@map async { IsReachableResult.NotExist }
@@ -79,7 +72,7 @@ class NetworkRepositoryImpl @Inject constructor(
             InetAddress.getByName(host).let { addr ->
                 val isReachable = addr.isReachable(timeout)
                 if (isReachable) {
-                    IsReachableResult.Exist(NetDevice(host, addr.hostName))
+                    IsReachableResult.Exist(NetDevice(host, addr.canonicalHostName.orEmpty()))
                 } else {
                     IsReachableResult.NotExist
                 }

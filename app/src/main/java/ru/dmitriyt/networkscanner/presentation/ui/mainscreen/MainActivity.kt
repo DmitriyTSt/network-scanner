@@ -15,15 +15,21 @@ class MainActivity : BaseActivity(), NavigationController {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        navigate(getStartFragment())
+        initNavigation()
     }
 
     override fun getStartFragment() = NetworkInterfacesFragment.newInstance()
 
-    override fun navigate(fragment: BaseFragment) {
+    override fun navigate(fragment: BaseFragment, addToBackStack: Boolean) {
         supportFragmentManager.beginTransaction()
             .replace(binding.fragmentContainerView.id, fragment)
-            .addToBackStack(null)
+            .let {
+                if (addToBackStack) {
+                    it.addToBackStack(null)
+                } else {
+                    it
+                }
+            }
             .commit()
     }
 

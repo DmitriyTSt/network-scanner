@@ -10,7 +10,7 @@ import ru.dmitriyt.networkscanner.presentation.extensions.inflate
 
 class NetInterfaceViewHolder(
     parent: ViewGroup,
-    private val onItemClick: (NetInterface) -> Unit,
+    private val onItemClick: (NetInterface.Connected) -> Unit,
 ) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_network_interface)) {
     private val binding by viewBinding(ItemNetworkInterfaceBinding::bind)
 
@@ -20,8 +20,15 @@ class NetInterfaceViewHolder(
             is NetInterface.Connected -> netInterface.ipAddress
             is NetInterface.Disconnected -> root.context.getString(R.string.net_interface_not_connected_status)
         }
-        root.setOnClickListener {
-            onItemClick(netInterface)
+        when (netInterface) {
+            is NetInterface.Connected -> {
+                root.setOnClickListener {
+                    onItemClick(netInterface)
+                }
+            }
+            is NetInterface.Disconnected -> {
+                root.setOnClickListener(null)
+            }
         }
     }
 }

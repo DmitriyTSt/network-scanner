@@ -10,6 +10,7 @@ import javax.inject.Inject
 
 class NetworkInterfacesViewModel @Inject constructor(
     private val getNetInterfacesUseCase: GetNetInterfacesUseCase,
+    private val destinations: NetworkInterfacesDestinations,
 ) : BaseViewModel() {
     /** Сетевые интерфейсы */
     private val _netInterfacesLiveData = MutableLiveData<LoadableState<List<NetInterface>>>()
@@ -17,5 +18,9 @@ class NetworkInterfacesViewModel @Inject constructor(
 
     fun loadNetInterfaces() {
         _netInterfacesLiveData.launchLoadData(getNetInterfacesUseCase.executeFlow(Unit))
+    }
+
+    fun openNetwork(netInterface: NetInterface.Connected) {
+        navigate(destinations.network(netInterface))
     }
 }
