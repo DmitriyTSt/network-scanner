@@ -40,11 +40,10 @@ class NetworkFragment : BaseFragment(R.layout.fragment_network) {
 
     override fun setupLayout(savedInstanceState: Bundle?) = with(binding) {
         toolbar.fitTopInsetsWithPadding()
-        toolbar.setNavigationOnClickListener {
-            viewModel.navigateBack()
-        }
+        setupToolbar()
         setupHeader()
         setupRecyclerView()
+        stateViewFlipper.setRetryMethod { viewModel.loadDevices(netInterface) }
     }
 
     override fun onBindViewModel() = with(viewModel) {
@@ -54,6 +53,16 @@ class NetworkFragment : BaseFragment(R.layout.fragment_network) {
             state.doOnSuccess { devices ->
                 adapter.submitList(devices)
             }
+        }
+    }
+
+    private fun setupToolbar() = with(binding) {
+        toolbar.setNavigationOnClickListener {
+            viewModel.navigateBack()
+        }
+        toolbar.menu.findItem(R.id.refresh).setOnMenuItemClickListener {
+            viewModel.loadDevices(netInterface)
+            true
         }
     }
 

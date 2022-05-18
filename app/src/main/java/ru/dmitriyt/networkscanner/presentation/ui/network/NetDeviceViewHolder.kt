@@ -15,6 +15,6 @@ class NetDeviceViewHolder(
 
     fun bind(device: NetDevice) = with(binding) {
         textViewHost.text = device.host
-        textViewHostname.text = device.hostName
+        textViewHostname.text = device.hostName ?: root.context.getString(R.string.unknown_device)
     }
 }

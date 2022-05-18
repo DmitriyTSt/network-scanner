@@ -30,6 +30,10 @@ class NetworkInterfacesFragment : BaseFragment(R.layout.fragment_network_interfa
 
     override fun setupLayout(savedInstanceState: Bundle?) = with(binding) {
         appBarLayout.fitTopInsetsWithPadding()
+        toolbar.menu.findItem(R.id.refresh).setOnMenuItemClickListener {
+            viewModel.loadNetInterfaces()
+            true
+        }
         setupRecyclerView()
     }
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -14,6 +14,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:menu="@menu/network_interfaces"
             app:title="@string/network_interfaces_title">
 
         </com.google.android.material.appbar.MaterialToolbar>
@@ -31,8 +32,8 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingVertical="16dp"
-            tools:listitem="@layout/item_network_interface"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_network_interface" />
     </ru.dmitriyt.networkscanner.presentation.ui.views.StateViewFlipper>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

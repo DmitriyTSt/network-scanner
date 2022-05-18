@@ -67,12 +67,12 @@ class NetworkRepositoryImpl @Inject constructor(
     /**
      * Доступен ли хост
      */
-    private suspend fun isReachable(host: String, timeout: Int): IsReachableResult = suspendCoroutine {
+    private suspend fun isReachable(host: String, timeout: Int): IsReachableResult = suspendCoroutine { continuation ->
         val isReachable = try {
             InetAddress.getByName(host).let { addr ->
                 val isReachable = addr.isReachable(timeout)
                 if (isReachable) {
-                    IsReachableResult.Exist(NetDevice(host, addr.canonicalHostName.orEmpty()))
+                    IsReachableResult.Exist(NetDevice(host, addr.hostName.takeIf { it != host }))
                 } else {
                     IsReachableResult.NotExist
                 }
@@ -80,6 +80,6 @@ class NetworkRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             IsReachableResult.NotExist
         }
-        it.resume(isReachable)
+        continuation.resume(isReachable)
     }
 }

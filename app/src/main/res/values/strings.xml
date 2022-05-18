@@ -6,4 +6,6 @@
     <string name="error_retry">Повторить</string>
     <string name="network_interfaces_title">Сетевые интерфейсы</string>
     <string name="net_interface_not_connected_status">Не подключен</string>
+    <string name="refresh_label">Обновить</string>
+    <string name="unknown_device">Неизвестное устройство</string>
 </resources>
