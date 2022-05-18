@@ -83,7 +83,7 @@ class NetworkRepositoryImpl @Inject constructor(
                 } else {
                     val device = getDeviceByInet(host, timeout)
                         ?: getDeviceByNetBios(host)
-                        ?: getDeviceByBonjour(host)
+//                        ?: getDeviceByBonjour(host)
                     if (device != null) {
                         devices.add(
                             device.copy(
