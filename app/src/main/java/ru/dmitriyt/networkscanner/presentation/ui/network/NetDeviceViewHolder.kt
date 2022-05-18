@@ -14,7 +14,15 @@ class NetDeviceViewHolder(
     private val binding by viewBinding(ItemNetworkDeviceBinding::bind)
 
     fun bind(device: NetDevice) = with(binding) {
+        imageViewIcon.setImageResource(
+            if (device.isCurrentDevice) {
+                R.drawable.ic_device_current
+            } else {
+                R.drawable.ic_device_hub
+            }
+        )
         textViewHost.text = device.host
         textViewHostname.text = device.hostName ?: root.context.getString(R.string.unknown_device)
+        textViewMacAddress.text = device.mac
     }
 }

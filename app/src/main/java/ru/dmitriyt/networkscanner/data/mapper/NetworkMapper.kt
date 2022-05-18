@@ -1,6 +1,7 @@
 package ru.dmitriyt.networkscanner.data.mapper
 
 import kotlinx.coroutines.withContext
+import ru.dmitriyt.networkscanner.data.model.NetDevice
 import ru.dmitriyt.networkscanner.data.model.NetInterface
 import ru.dmitriyt.networkscanner.di.module.DispatcherProvider
 import java.net.InetAddress
@@ -38,6 +39,14 @@ class NetworkMapper @Inject constructor(
         }
     }
 
+    fun fromInetAddressToDevice(inetAddress: InetAddress, host: String): NetDevice {
+        return NetDevice(
+            host = host,
+            hostName = inetAddress.hostName.takeIf { it != host },
+            mac = null,
+        )
+    }
+
     /**
      * Получить сеть по любому адресу и маске
      */
@@ -56,7 +65,7 @@ class NetworkMapper @Inject constructor(
         return address.split(".").mapIndexed { index, part -> part.toUInt() * 256.0.pow(3 - index).toUInt() }.sum()
     }
 
-    fun prefixLengthToInt(prefix: Short): UInt {
+    private fun prefixLengthToInt(prefix: Short): UInt {
         val mask = buildString {
             repeat(prefix.toInt()) {
                 append('1')

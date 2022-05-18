@@ -17,7 +17,7 @@ class NetInterfaceViewHolder(
     fun bind(netInterface: NetInterface) = with(binding) {
         textViewName.text = netInterface.name
         textViewAddress.text = when (netInterface) {
-            is NetInterface.Connected -> netInterface.ipAddress
+            is NetInterface.Connected -> "${netInterface.ipAddress}/${netInterface.prefixLength}"
             is NetInterface.Disconnected -> root.context.getString(R.string.net_interface_not_connected_status)
         }
         val isUpIcon = if (netInterface.isUp) {
@@ -26,15 +26,19 @@ class NetInterfaceViewHolder(
             R.drawable.ic_network_interface_down
         }
         textViewAddress.setCompoundDrawablesRelativeWithIntrinsicBounds(isUpIcon, 0, 0, 0)
-        when (netInterface) {
-            is NetInterface.Connected -> {
-                root.setOnClickListener {
-                    onItemClick(netInterface)
+        if (!netInterface.isLoopback) {
+            when (netInterface) {
+                is NetInterface.Connected -> {
+                    root.setOnClickListener {
+                        onItemClick(netInterface)
+                    }
+                }
+                is NetInterface.Disconnected -> {
+                    root.setOnClickListener(null)
                 }
             }
-            is NetInterface.Disconnected -> {
-                root.setOnClickListener(null)
-            }
+        } else {
+            root.setOnClickListener(null)
         }
     }
 }
