@@ -21,8 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="4dp"
+        android:drawablePadding="4dp"
         android:textAppearance="@style/Font.Body2"
         android:textColor="?android:textColorSecondary"
+        tools:drawableStartCompat="@drawable/ic_network_interface_up"
         tools:text="192.168.0.1" />
 
 </LinearLayout>

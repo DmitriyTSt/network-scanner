@@ -20,16 +20,19 @@ class NetworkRepositoryImpl @Inject constructor(
     private val mapper: NetworkMapper,
 ) : NetworkRepository {
     override suspend fun getNetInterfaces(): List<NetInterface> {
-        return getNetworkInterfacesList().map { mapper.fromSystemToModel(it) }
+        return getNetworkInterfacesList().map { mapper.fromSystemToModel(it) }.sortedBy { !it.isUp }
     }
 
-    override suspend fun getDevices(netInterface: NetInterface.Connected, timeout: Int): List<NetDevice> {
-        return getDevices(mapper.ipv4ToUInt(netInterface.networkIpAddress), netInterface.prefixLength, timeout)
+    override suspend fun getDevices(
+        netInterface: NetInterface.Connected,
+        timeout: Int
+    ): List<NetDevice> = withContext(dispatcherProvider.io) {
+        getDevices(mapper.ipv4ToUInt(netInterface.networkIpAddress), netInterface.prefixLength, timeout)
     }
 
     private fun getNetworkInterfacesList(): List<NetworkInterface> {
         return try {
-            NetworkInterface.getNetworkInterfaces().toList().filter { it.isUp && !it.isLoopback }
+            NetworkInterface.getNetworkInterfaces().toList()
         } catch (e: Exception) {
             Timber.e(e)
             emptyList()

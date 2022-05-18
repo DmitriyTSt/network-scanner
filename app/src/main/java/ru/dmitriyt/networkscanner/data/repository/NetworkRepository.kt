@@ -5,5 +5,5 @@ import ru.dmitriyt.networkscanner.data.model.NetInterface
 
 interface NetworkRepository {
     suspend fun getNetInterfaces(): List<NetInterface>
-    suspend fun getDevices(netInterface: NetInterface.Connected, timeout: Int = 1000): List<NetDevice>
+    suspend fun getDevices(netInterface: NetInterface.Connected, timeout: Int = 2000): List<NetDevice>
 }

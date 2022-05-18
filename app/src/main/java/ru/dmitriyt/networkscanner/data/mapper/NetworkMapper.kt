@@ -18,6 +18,8 @@ class NetworkMapper @Inject constructor(
         return if (ipv4Address != null && interfaceAddressIpv4 != null) {
             NetInterface.Connected(
                 name = netInterface.displayName,
+                isUp = netInterface.isUp,
+                isLoopback = netInterface.isLoopback,
                 ipAddress = ipv4Address,
                 prefixLength = interfaceAddressIpv4.networkPrefixLength,
                 networkIpAddress = uIntToIpv4(
@@ -28,7 +30,11 @@ class NetworkMapper @Inject constructor(
                 ),
             )
         } else {
-            NetInterface.Disconnected(name = netInterface.displayName)
+            NetInterface.Disconnected(
+                name = netInterface.displayName,
+                isUp = netInterface.isUp,
+                isLoopback = netInterface.isLoopback,
+            )
         }
     }
 

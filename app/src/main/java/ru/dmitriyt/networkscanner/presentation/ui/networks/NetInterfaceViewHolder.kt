@@ -20,6 +20,12 @@ class NetInterfaceViewHolder(
             is NetInterface.Connected -> netInterface.ipAddress
             is NetInterface.Disconnected -> root.context.getString(R.string.net_interface_not_connected_status)
         }
+        val isUpIcon = if (netInterface.isUp) {
+            R.drawable.ic_network_interface_up
+        } else {
+            R.drawable.ic_network_interface_down
+        }
+        textViewAddress.setCompoundDrawablesRelativeWithIntrinsicBounds(isUpIcon, 0, 0, 0)
         when (netInterface) {
             is NetInterface.Connected -> {
                 root.setOnClickListener {

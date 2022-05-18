@@ -5,15 +5,23 @@ import kotlinx.parcelize.Parcelize
 
 sealed class NetInterface(
     open val name: String,
+    open val isUp: Boolean,
+    open val isLoopback: Boolean,
 ) : Parcelable {
     @Parcelize
     class Connected(
         override val name: String,
+        override val isUp: Boolean,
+        override val isLoopback: Boolean,
         val ipAddress: String,
         val prefixLength: Short,
         val networkIpAddress: String,
-    ) : NetInterface(name)
+    ) : NetInterface(name, isUp, isLoopback)
 
     @Parcelize
-    class Disconnected(override val name: String) : NetInterface(name)
+    class Disconnected(
+        override val name: String,
+        override val isUp: Boolean,
+        override val isLoopback: Boolean,
+    ) : NetInterface(name, isUp, isLoopback)
 }
