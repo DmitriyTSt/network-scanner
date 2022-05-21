@@ -14,14 +14,31 @@
         android:contentDescription="@null"
         android:src="@drawable/ic_device_hub" />
 
-    <TextView
-        android:id="@+id/textViewHost"
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:textAppearance="@style/Font.Body1"
-        tools:text="192.168.0.1" />
+        android:orientation="vertical"
+        android:paddingVertical="4dp">
+
+        <TextView
+            android:id="@+id/textViewHost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textAppearance="@style/Font.Body1"
+            tools:text="192.168.0.1" />
+
+        <TextView
+            android:id="@+id/textViewMacAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/Font.Body2"
+            android:textColor="?android:textColorSecondary"
+            tools:text="11:22:33:44:55:66" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -40,16 +57,5 @@
             android:textAlignment="textEnd"
             android:textAppearance="@style/Font.Body1"
             tools:text="ASUS" />
-
-        <TextView
-            android:id="@+id/textViewMacAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="4dp"
-            android:textAlignment="textEnd"
-            android:textAppearance="@style/Font.Body2"
-            android:textColor="?android:textColorSecondary"
-            tools:text="11:22:33:44:55:66" />
     </LinearLayout>
 </LinearLayout>

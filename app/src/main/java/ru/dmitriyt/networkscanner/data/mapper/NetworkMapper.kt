@@ -2,6 +2,7 @@ package ru.dmitriyt.networkscanner.data.mapper
 
 import kotlinx.coroutines.withContext
 import ru.dmitriyt.networkscanner.data.model.NetDevice
+import ru.dmitriyt.networkscanner.data.model.NetHost
 import ru.dmitriyt.networkscanner.data.model.NetInterface
 import ru.dmitriyt.networkscanner.di.module.DispatcherProvider
 import java.net.InetAddress
@@ -12,6 +13,7 @@ import kotlin.math.pow
 
 class NetworkMapper @Inject constructor(
     private val dispatcherProvider: DispatcherProvider,
+    private val netUnitMapper: NetUnitMapper,
 ) {
     suspend fun fromSystemToModel(netInterface: NetworkInterface): NetInterface {
         val ipv4Address = netInterface.getIpAddress(useIPv4 = true)
@@ -22,8 +24,9 @@ class NetworkMapper @Inject constructor(
                 isUp = netInterface.isUp,
                 isLoopback = netInterface.isLoopback,
                 ipAddress = ipv4Address,
+                macAddress = netInterface.hardwareAddress?.let { netUnitMapper.macAddressFromByteArray(it) },
                 prefixLength = interfaceAddressIpv4.networkPrefixLength,
-                networkIpAddress = uIntToIpv4(
+                networkIpAddress = netUnitMapper.uIntToIpv4(
                     getNetworkFromAddressAndMask(
                         ipv4Address,
                         interfaceAddressIpv4.networkPrefixLength,
@@ -39,42 +42,11 @@ class NetworkMapper @Inject constructor(
         }
     }
 
-    fun fromInetAddressToDevice(inetAddress: InetAddress, host: String): NetDevice {
-        return NetDevice(
-            host = host,
-            hostName = inetAddress.hostName.takeIf { it != host },
-            mac = null,
-        )
-    }
-
     /**
      * Получить сеть по любому адресу и маске
      */
     private fun getNetworkFromAddressAndMask(ipv4Address: String, prefixLength: Short): UInt {
-        return ipv4ToUInt(ipv4Address) and prefixLengthToInt(prefixLength)
-    }
-
-    fun uIntToIpv4(address: UInt): String {
-        return address.toString(2)
-            .padStart(32, '0')
-            .chunked(8)
-            .joinToString(".") { it.toInt(2).toString() }
-    }
-
-    fun ipv4ToUInt(address: String): UInt {
-        return address.split(".").mapIndexed { index, part -> part.toUInt() * 256.0.pow(3 - index).toUInt() }.sum()
-    }
-
-    private fun prefixLengthToInt(prefix: Short): UInt {
-        val mask = buildString {
-            repeat(prefix.toInt()) {
-                append('1')
-            }
-            repeat(32 - prefix) {
-                append('0')
-            }
-        }
-        return mask.toUInt(2)
+        return netUnitMapper.ipv4ToUInt(ipv4Address) and netUnitMapper.prefixLengthToInt(prefixLength)
     }
 
     private suspend fun NetworkInterface.getIpAddress(useIPv4: Boolean): String? = withContext(dispatcherProvider.io) {

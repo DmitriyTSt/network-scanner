@@ -7,6 +7,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import ru.dmitriyt.networkscanner.R
 import ru.dmitriyt.networkscanner.data.model.NetInterface
 import ru.dmitriyt.networkscanner.databinding.FragmentNetworkBinding
+import ru.dmitriyt.networkscanner.presentation.extensions.addVerticalDividerItemDecoration
 import ru.dmitriyt.networkscanner.presentation.extensions.appViewModels
 import ru.dmitriyt.networkscanner.presentation.extensions.fitTopInsetsWithPadding
 import ru.dmitriyt.networkscanner.presentation.navigation.observeNavigationCommands
@@ -78,5 +79,6 @@ class NetworkFragment : BaseFragment(R.layout.fragment_network) {
 
     private fun setupRecyclerView() = with(binding) {
         recyclerView.adapter = adapter
+        recyclerView.addVerticalDividerItemDecoration()
     }
 }
