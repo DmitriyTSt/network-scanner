@@ -2,9 +2,6 @@ package ru.dmitriyt.networkscanner.presentation
 
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import ru.dmitriyt.networkscanner.data.repository.NetworkRepository
 import ru.dmitriyt.networkscanner.di.component.DaggerApplicationComponent
 import timber.log.Timber

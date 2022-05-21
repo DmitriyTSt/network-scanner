@@ -1,7 +1,5 @@
 package ru.dmitriyt.networkscanner.data.repository
 
-import kotlinx.coroutines.flow.Flow
-import ru.dmitriyt.networkscanner.data.model.NetDevice
 import ru.dmitriyt.networkscanner.data.model.NetInterface
 
 interface NetworkRepository {

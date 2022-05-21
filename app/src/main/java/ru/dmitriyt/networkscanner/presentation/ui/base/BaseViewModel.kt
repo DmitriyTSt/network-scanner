@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.dmitriyt.networkscanner.data.model.LoadableState
 import ru.dmitriyt.networkscanner.presentation.navigation.Destination
