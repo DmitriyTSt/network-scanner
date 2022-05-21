@@ -55,6 +55,7 @@ class NetworkFragment : BaseFragment(R.layout.fragment_network) {
         }
         devicesDataLiveData.observe { devices ->
             adapter.submitList(devices)
+            binding.recyclerView.invalidateItemDecorations()
         }
         scanStateLiveEvent.observe { state ->
             binding.toolbar.menu.findItem(R.id.refresh).isVisible = !state.isLoading

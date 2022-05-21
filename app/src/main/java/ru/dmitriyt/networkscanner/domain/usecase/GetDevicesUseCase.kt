@@ -50,18 +50,18 @@ class GetDevicesUseCase @Inject constructor(
                     val netHost = (netHostIcmp ?: netHostNetBios)
                         ?.copy(hostName = netHostNetBios?.hostName ?: netHostIcmp?.hostName)
                     if (netHost != null) {
-                        val isCurrentDevice = netHost.host == params.netInterface.ipAddress
-                        devices.add(
+                        val isCurrentDevice = netHost.host == params.netInterface.currentDevice.host
+                        val device = if (isCurrentDevice) {
+                            params.netInterface.currentDevice
+                        } else {
                             netHostMapper.fromHostToDevice(
                                 netHost = netHost,
                                 isCurrentDevice = isCurrentDevice,
-                                mac = if (isCurrentDevice) {
-                                    params.netInterface.macAddress
-                                } else {
-                                    arpTable[netHost.host]
-                                }
+                                mac = arpTable[netHost.host]
                             )
-                        )
+                        }
+                        devices.add(device)
+
                         if (!isClosedForSend) {
                             send(devices.toList())
                         }
@@ -74,8 +74,8 @@ class GetDevicesUseCase @Inject constructor(
             send(
                 devices.toList().map {
                     it.copy(
-                        mac = if (it.host == params.netInterface.ipAddress) {
-                            params.netInterface.macAddress
+                        mac = if (it.host == params.netInterface.currentDevice.host) {
+                            params.netInterface.currentDevice.mac
                         } else {
                             newArpTable[it.host] ?: it.mac
                         }

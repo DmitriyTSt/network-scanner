@@ -17,7 +17,7 @@ class NetInterfaceViewHolder(
     fun bind(netInterface: NetInterface) = with(binding) {
         textViewName.text = netInterface.name
         textViewAddress.text = when (netInterface) {
-            is NetInterface.Connected -> "${netInterface.ipAddress}/${netInterface.prefixLength}"
+            is NetInterface.Connected -> "${netInterface.currentDevice.host}/${netInterface.prefixLength}"
             is NetInterface.Disconnected -> root.context.getString(R.string.net_interface_not_connected_status)
         }
         val isUpIcon = if (netInterface.isUp) {

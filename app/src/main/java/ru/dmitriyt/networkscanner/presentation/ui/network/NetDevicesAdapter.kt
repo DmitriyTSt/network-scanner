@@ -1,11 +1,14 @@
 package ru.dmitriyt.networkscanner.presentation.ui.network
 
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
+import ru.dmitriyt.networkscanner.data.DiffUtilItemCallbackFactory
 import ru.dmitriyt.networkscanner.data.model.NetDevice
-import ru.dmitriyt.networkscanner.presentation.ui.base.BaseAdapter
 import javax.inject.Inject
 
-class NetDevicesAdapter @Inject constructor() : BaseAdapter<NetDevice, NetDeviceViewHolder>() {
+class NetDevicesAdapter @Inject constructor(
+    diffUtilItemCallbackFactory: DiffUtilItemCallbackFactory,
+) : ListAdapter<NetDevice, NetDeviceViewHolder>(diffUtilItemCallbackFactory.create()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NetDeviceViewHolder {
         return NetDeviceViewHolder(parent)
     }

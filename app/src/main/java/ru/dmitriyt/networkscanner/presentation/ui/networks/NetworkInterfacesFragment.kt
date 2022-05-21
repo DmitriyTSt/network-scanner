@@ -44,6 +44,9 @@ class NetworkInterfacesFragment : BaseFragment(R.layout.fragment_network_interfa
             state.doOnSuccess { netInterfaces ->
                 adapter.submitList(netInterfaces)
             }
+            state.doOnError {
+                val a = 1
+            }
         }
     }
 

@@ -2,29 +2,33 @@ package ru.dmitriyt.networkscanner.data.mapper
 
 import kotlinx.coroutines.withContext
 import ru.dmitriyt.networkscanner.data.model.NetDevice
-import ru.dmitriyt.networkscanner.data.model.NetHost
 import ru.dmitriyt.networkscanner.data.model.NetInterface
 import ru.dmitriyt.networkscanner.di.module.DispatcherProvider
 import java.net.InetAddress
 import java.net.InterfaceAddress
 import java.net.NetworkInterface
 import javax.inject.Inject
-import kotlin.math.pow
 
 class NetworkMapper @Inject constructor(
     private val dispatcherProvider: DispatcherProvider,
     private val netUnitMapper: NetUnitMapper,
 ) {
-    suspend fun fromSystemToModel(netInterface: NetworkInterface): NetInterface {
-        val ipv4Address = netInterface.getIpAddress(useIPv4 = true)
+    suspend fun fromSystemToModel(netInterface: NetworkInterface): NetInterface = withContext(dispatcherProvider.io) {
+        val ipv4InetAddress = netInterface.getInetAddress(useIPv4 = true)
+        val ipv4Address = ipv4InetAddress?.addressToString(useIPv4 = true)
         val interfaceAddressIpv4 = netInterface.interfaceAddresses.findInterfaceAddress(true)
-        return if (ipv4Address != null && interfaceAddressIpv4 != null) {
+        if (ipv4InetAddress != null && ipv4Address != null && interfaceAddressIpv4 != null) {
             NetInterface.Connected(
                 name = netInterface.displayName,
                 isUp = netInterface.isUp,
                 isLoopback = netInterface.isLoopback,
-                ipAddress = ipv4Address,
-                macAddress = netInterface.hardwareAddress?.let { netUnitMapper.macAddressFromByteArray(it) },
+                currentDevice = NetDevice(
+                    host = ipv4Address,
+                    hostName = ipv4InetAddress.hostName.takeIf { it != ipv4Address },
+                    addressUInt = netUnitMapper.ipv4ToUInt(ipv4Address),
+                    isCurrentDevice = true,
+                    mac = netInterface.hardwareAddress?.let { netUnitMapper.macAddressFromByteArray(it) },
+                ),
                 prefixLength = interfaceAddressIpv4.networkPrefixLength,
                 networkIpAddress = netUnitMapper.uIntToIpv4(
                     getNetworkFromAddressAndMask(
@@ -49,8 +53,8 @@ class NetworkMapper @Inject constructor(
         return netUnitMapper.ipv4ToUInt(ipv4Address) and netUnitMapper.prefixLengthToInt(prefixLength)
     }
 
-    private suspend fun NetworkInterface.getIpAddress(useIPv4: Boolean): String? = withContext(dispatcherProvider.io) {
-        inetAddresses.toList().findInetAddress(useIPv4)?.addressToString(useIPv4)
+    private suspend fun NetworkInterface.getInetAddress(useIPv4: Boolean): InetAddress? = withContext(dispatcherProvider.io) {
+        inetAddresses.toList().findInetAddress(useIPv4)
     }
 
     private fun List<InterfaceAddress>.findInterfaceAddress(useIPv4: Boolean): InterfaceAddress? {
@@ -81,10 +85,10 @@ class NetworkMapper @Inject constructor(
         return (hostAddress?.indexOf(':') ?: -1) >= 0
     }
 
-    private fun InetAddress.addressToString(useIPv4: Boolean): String? {
+    private suspend fun InetAddress.addressToString(useIPv4: Boolean): String? = withContext(dispatcherProvider.io) {
         val isIPv4 = isIpv4()
-        val sAddr = hostAddress ?: return null
-        return if (useIPv4) {
+        val sAddr = hostAddress ?: return@withContext null
+        if (useIPv4) {
             if (isIPv4) sAddr else null
         } else {
             if (!isIPv4) {

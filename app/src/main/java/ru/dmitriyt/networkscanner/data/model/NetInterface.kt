@@ -13,8 +13,7 @@ sealed class NetInterface(
         override val name: String,
         override val isUp: Boolean,
         override val isLoopback: Boolean,
-        val ipAddress: String,
-        val macAddress: String?,
+        val currentDevice: NetDevice,
         val prefixLength: Short,
         val networkIpAddress: String,
     ) : NetInterface(name, isUp, isLoopback)
