@@ -3,7 +3,6 @@ package ru.dmitriyt.networkscanner.data.scanner
 import ru.dmitriyt.networkscanner.data.mapper.NetHostMapper
 import ru.dmitriyt.networkscanner.data.mapper.NetUnitMapper
 import ru.dmitriyt.networkscanner.data.model.NetHost
-import timber.log.Timber
 import java.net.InetAddress
 import javax.inject.Inject
 import kotlin.coroutines.resume
@@ -26,7 +25,6 @@ class IcmpPingScanner @Inject constructor(
             InetAddress.getByName(host).let { addr ->
                 val isReachable = addr.isReachable(timeout)
                 if (isReachable) {
-                    Timber.d("IS REACHABLE $host")
                     mapper.fromSystemToModel(addr, host, addressUInt)
                 } else {
                     null
