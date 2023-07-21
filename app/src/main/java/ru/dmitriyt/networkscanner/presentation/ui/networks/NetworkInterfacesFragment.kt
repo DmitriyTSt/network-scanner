@@ -1,16 +1,18 @@
 package ru.dmitriyt.networkscanner.presentation.ui.networks
 
 import android.os.Bundle
+import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import ru.dmitriyt.networkscanner.R
 import ru.dmitriyt.networkscanner.databinding.FragmentNetworkInterfacesBinding
 import ru.dmitriyt.networkscanner.presentation.extensions.addLinearSpaceItemDecoration
-import ru.dmitriyt.networkscanner.presentation.extensions.appViewModels
 import ru.dmitriyt.networkscanner.presentation.extensions.fitTopInsetsWithPadding
 import ru.dmitriyt.networkscanner.presentation.navigation.observeNavigationCommands
 import ru.dmitriyt.networkscanner.presentation.ui.base.BaseFragment
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class NetworkInterfacesFragment : BaseFragment(R.layout.fragment_network_interfaces) {
 
     companion object {
@@ -20,7 +22,7 @@ class NetworkInterfacesFragment : BaseFragment(R.layout.fragment_network_interfa
     }
 
     private val binding by viewBinding(FragmentNetworkInterfacesBinding::bind)
-    private val viewModel: NetworkInterfacesViewModel by appViewModels()
+    private val viewModel: NetworkInterfacesViewModel by viewModels()
 
     @Inject lateinit var adapter: NetInterfacesAdapter
 

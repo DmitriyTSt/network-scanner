@@ -29,8 +29,8 @@ private fun Fragment.findNavController(): NavigationController {
             currentParentFragment = currentParentFragment.parentFragment
         }
     }
-    if (context is NavigationController) {
-        return context as NavigationController
+    if (activity is NavigationController) {
+        return activity as NavigationController
     }
     throw IllegalStateException("NavigationController not found")
 }

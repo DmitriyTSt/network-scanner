@@ -1,21 +1,11 @@
 package ru.dmitriyt.networkscanner.presentation
 
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
-import ru.dmitriyt.networkscanner.di.component.DaggerApplicationComponent
-import ru.dmitriyt.networkscanner.domain.repository.NetworkRepository
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
-import javax.inject.Inject
 
-class NetworkScannerApplication : DaggerApplication() {
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerApplicationComponent
-            .factory()
-            .create(this)
-    }
-
-    @Inject lateinit var networkRepository: NetworkRepository
+@HiltAndroidApp
+class NetworkScannerApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

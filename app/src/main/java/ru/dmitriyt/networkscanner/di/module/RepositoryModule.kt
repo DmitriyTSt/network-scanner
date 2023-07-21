@@ -2,6 +2,8 @@ package ru.dmitriyt.networkscanner.di.module
 
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import ru.dmitriyt.networkscanner.data.repository.ArpTableRepositoryImpl
 import ru.dmitriyt.networkscanner.data.repository.NetworkRepositoryImpl
 import ru.dmitriyt.networkscanner.data.repository.ResourceRepositoryImpl
@@ -10,6 +12,7 @@ import ru.dmitriyt.networkscanner.domain.repository.NetworkRepository
 import ru.dmitriyt.networkscanner.domain.repository.ResourceRepository
 
 @Module
+@InstallIn(ViewModelComponent::class)
 abstract class RepositoryModule {
     @Binds
     abstract fun provideNetworkRepository(networkRepository: NetworkRepositoryImpl): NetworkRepository
