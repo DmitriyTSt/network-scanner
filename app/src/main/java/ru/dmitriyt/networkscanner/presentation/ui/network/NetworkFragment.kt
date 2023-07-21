@@ -5,8 +5,8 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import by.kirich1409.viewbindingdelegate.viewBinding
 import ru.dmitriyt.networkscanner.R
-import ru.dmitriyt.networkscanner.domain.model.NetInterface
 import ru.dmitriyt.networkscanner.databinding.FragmentNetworkBinding
+import ru.dmitriyt.networkscanner.domain.model.NetInterface
 import ru.dmitriyt.networkscanner.presentation.extensions.addVerticalDividerItemDecoration
 import ru.dmitriyt.networkscanner.presentation.extensions.appViewModels
 import ru.dmitriyt.networkscanner.presentation.extensions.fitTopInsetsWithPadding

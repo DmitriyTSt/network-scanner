@@ -34,7 +34,7 @@ fun RecyclerView.addVerticalDividerItemDecoration(
     @DrawableRes drawableRes: Int = R.drawable.view_recycler_view_divider,
     firstDividerPosition: Int = 0,
     shouldDrawFirstDivider: Boolean = false,
-    endOffset: Int = 1
+    endOffset: Int = 1,
 ) {
     fun Context.getDrawableCompat(@DrawableRes drawableRes: Int): Drawable? {
         return ContextCompat.getDrawable(this, drawableRes)

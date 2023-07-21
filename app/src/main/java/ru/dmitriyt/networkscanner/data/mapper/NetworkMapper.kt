@@ -1,9 +1,9 @@
 package ru.dmitriyt.networkscanner.data.mapper
 
 import kotlinx.coroutines.withContext
+import ru.dmitriyt.networkscanner.di.module.DispatcherProvider
 import ru.dmitriyt.networkscanner.domain.model.NetDevice
 import ru.dmitriyt.networkscanner.domain.model.NetInterface
-import ru.dmitriyt.networkscanner.di.module.DispatcherProvider
 import java.net.InetAddress
 import java.net.InterfaceAddress
 import java.net.NetworkInterface

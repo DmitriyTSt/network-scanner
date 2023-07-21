@@ -2,8 +2,8 @@ package ru.dmitriyt.networkscanner.presentation
 
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
-import ru.dmitriyt.networkscanner.domain.repository.NetworkRepository
 import ru.dmitriyt.networkscanner.di.component.DaggerApplicationComponent
+import ru.dmitriyt.networkscanner.domain.repository.NetworkRepository
 import timber.log.Timber
 import javax.inject.Inject
 

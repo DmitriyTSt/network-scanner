@@ -3,7 +3,6 @@ package ru.dmitriyt.networkscanner.presentation.ui.network
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import ru.dmitriyt.networkscanner.data.DiffUtilItemCallbackFactory
-import ru.dmitriyt.networkscanner.domain.model.NetDevice
 import ru.dmitriyt.networkscanner.presentation.model.UiNetDevice
 import javax.inject.Inject
 

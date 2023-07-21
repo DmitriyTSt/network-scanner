@@ -7,13 +7,13 @@ import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.withContext
 import ru.dmitriyt.networkscanner.data.mapper.NetHostMapper
 import ru.dmitriyt.networkscanner.data.mapper.NetUnitMapper
+import ru.dmitriyt.networkscanner.data.scanner.IcmpPingScanner
+import ru.dmitriyt.networkscanner.data.scanner.NetBiosScanner
+import ru.dmitriyt.networkscanner.di.module.DispatcherProvider
 import ru.dmitriyt.networkscanner.domain.model.NetDevice
 import ru.dmitriyt.networkscanner.domain.model.NetInterface
 import ru.dmitriyt.networkscanner.domain.repository.ArpTableRepository
 import ru.dmitriyt.networkscanner.domain.repository.NetworkRepository
-import ru.dmitriyt.networkscanner.data.scanner.IcmpPingScanner
-import ru.dmitriyt.networkscanner.data.scanner.NetBiosScanner
-import ru.dmitriyt.networkscanner.di.module.DispatcherProvider
 import ru.dmitriyt.networkscanner.domain.usecase.base.UseCaseFlow
 import timber.log.Timber
 import java.util.TreeSet
