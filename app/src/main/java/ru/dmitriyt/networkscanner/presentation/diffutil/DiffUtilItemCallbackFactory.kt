@@ -1,4 +1,4 @@
-package ru.dmitriyt.networkscanner.data
+package ru.dmitriyt.networkscanner.presentation.diffutil
 
 import androidx.recyclerview.widget.DiffUtil
 

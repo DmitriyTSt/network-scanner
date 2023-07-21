@@ -4,8 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.dmitriyt.networkscanner.data.DiffUtilCallbackFactory
-import ru.dmitriyt.networkscanner.data.DiffUtilItemCallbackFactory
+import ru.dmitriyt.networkscanner.presentation.diffutil.DiffUtilCallbackFactory
+import ru.dmitriyt.networkscanner.presentation.diffutil.DiffUtilItemCallbackFactory
 
 @Module
 @InstallIn(SingletonComponent::class)

@@ -3,7 +3,7 @@ package ru.dmitriyt.networkscanner.presentation.model
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
 import kotlinx.parcelize.Parcelize
-import ru.dmitriyt.networkscanner.data.Similarable
+import ru.dmitriyt.networkscanner.presentation.diffutil.Similarable
 
 @Parcelize
 data class UiNetDevice(
