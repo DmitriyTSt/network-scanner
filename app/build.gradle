@@ -41,9 +41,9 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation "androidx.fragment:fragment-ktx:1.4.1"
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation "androidx.fragment:fragment-ktx:1.5.1"
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
 
@@ -55,12 +55,11 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$daggerVersion"
 
     def lifecycleVersion = "2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
 
     // Logger
     implementation "com.jakewharton.timber:timber:4.7.1"
-
-    // livedata
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
 
     // viewBinding delegate
     implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.3"
