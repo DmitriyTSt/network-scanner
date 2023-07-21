@@ -1,6 +1,6 @@
-package ru.dmitriyt.networkscanner.data.repository
+package ru.dmitriyt.networkscanner.domain.repository
 
-import ru.dmitriyt.networkscanner.data.model.NetInterface
+import ru.dmitriyt.networkscanner.domain.model.NetInterface
 
 interface NetworkRepository {
     suspend fun getNetInterfaces(): List<NetInterface>

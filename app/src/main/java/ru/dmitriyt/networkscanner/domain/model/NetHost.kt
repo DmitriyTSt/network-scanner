@@ -1,4 +1,4 @@
-package ru.dmitriyt.networkscanner.data.model
+package ru.dmitriyt.networkscanner.domain.model
 
 data class NetHost(
     val host: String,

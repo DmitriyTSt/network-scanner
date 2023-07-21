@@ -6,9 +6,9 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import ru.dmitriyt.networkscanner.data.model.LoadableState
-import ru.dmitriyt.networkscanner.data.model.NetDevice
-import ru.dmitriyt.networkscanner.data.model.NetInterface
+import ru.dmitriyt.networkscanner.presentation.model.LoadableState
+import ru.dmitriyt.networkscanner.domain.model.NetDevice
+import ru.dmitriyt.networkscanner.domain.model.NetInterface
 import ru.dmitriyt.networkscanner.domain.usecase.GetDevicesUseCase
 import ru.dmitriyt.networkscanner.presentation.ui.base.BaseViewModel
 import ru.dmitriyt.networkscanner.presentation.ui.base.SingleLiveEvent

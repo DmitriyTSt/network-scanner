@@ -1,7 +1,7 @@
 package ru.dmitriyt.networkscanner.data.mapper
 
-import ru.dmitriyt.networkscanner.data.model.NetDevice
-import ru.dmitriyt.networkscanner.data.model.NetHost
+import ru.dmitriyt.networkscanner.domain.model.NetDevice
+import ru.dmitriyt.networkscanner.domain.model.NetHost
 import java.net.InetAddress
 import javax.inject.Inject
 

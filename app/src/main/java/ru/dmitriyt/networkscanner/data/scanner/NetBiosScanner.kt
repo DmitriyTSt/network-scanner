@@ -3,7 +3,7 @@ package ru.dmitriyt.networkscanner.data.scanner
 import jcifs.netbios.NbtAddress
 import ru.dmitriyt.networkscanner.data.mapper.NetHostMapper
 import ru.dmitriyt.networkscanner.data.mapper.NetUnitMapper
-import ru.dmitriyt.networkscanner.data.model.NetHost
+import ru.dmitriyt.networkscanner.domain.model.NetHost
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine

@@ -8,7 +8,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import ru.dmitriyt.networkscanner.data.model.LoadableState
+import ru.dmitriyt.networkscanner.presentation.model.LoadableState
 import ru.dmitriyt.networkscanner.presentation.navigation.Destination
 
 abstract class BaseViewModel : ViewModel() {

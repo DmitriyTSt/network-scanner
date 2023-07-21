@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.widget.ViewFlipper
 import androidx.annotation.StringRes
 import ru.dmitriyt.networkscanner.R
-import ru.dmitriyt.networkscanner.data.model.LoadableState
+import ru.dmitriyt.networkscanner.presentation.model.LoadableState
 import ru.dmitriyt.networkscanner.databinding.ViewErrorStateBinding
 import ru.dmitriyt.networkscanner.databinding.ViewLoadingStateBinding
 

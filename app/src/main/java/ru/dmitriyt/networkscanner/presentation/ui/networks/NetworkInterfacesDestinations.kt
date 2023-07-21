@@ -1,6 +1,6 @@
 package ru.dmitriyt.networkscanner.presentation.ui.networks
 
-import ru.dmitriyt.networkscanner.data.model.NetInterface
+import ru.dmitriyt.networkscanner.domain.model.NetInterface
 import ru.dmitriyt.networkscanner.presentation.navigation.Destination
 import ru.dmitriyt.networkscanner.presentation.ui.network.NetworkFragment
 import javax.inject.Inject

@@ -1,7 +1,7 @@
 package ru.dmitriyt.networkscanner.presentation.ui.networks
 
 import android.view.ViewGroup
-import ru.dmitriyt.networkscanner.data.model.NetInterface
+import ru.dmitriyt.networkscanner.domain.model.NetInterface
 import ru.dmitriyt.networkscanner.presentation.ui.base.BaseAdapter
 import javax.inject.Inject
 

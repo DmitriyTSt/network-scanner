@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import kotlinx.coroutines.withContext
 import ru.dmitriyt.networkscanner.di.module.DispatcherProvider
+import ru.dmitriyt.networkscanner.domain.repository.ArpTableRepository
 import java.io.BufferedReader
 import java.io.FileNotFoundException
 import java.io.FileReader

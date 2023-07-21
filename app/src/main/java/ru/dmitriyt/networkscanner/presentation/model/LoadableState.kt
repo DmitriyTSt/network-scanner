@@ -1,4 +1,4 @@
-package ru.dmitriyt.networkscanner.data.model
+package ru.dmitriyt.networkscanner.presentation.model
 
 sealed class LoadableState<T> {
     class Loading<T> : LoadableState<T>()

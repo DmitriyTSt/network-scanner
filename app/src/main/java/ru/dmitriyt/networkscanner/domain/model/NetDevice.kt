@@ -1,4 +1,4 @@
-package ru.dmitriyt.networkscanner.data.model
+package ru.dmitriyt.networkscanner.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

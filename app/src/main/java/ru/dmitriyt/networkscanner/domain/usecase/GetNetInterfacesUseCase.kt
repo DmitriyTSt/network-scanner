@@ -1,7 +1,7 @@
 package ru.dmitriyt.networkscanner.domain.usecase
 
-import ru.dmitriyt.networkscanner.data.model.NetInterface
-import ru.dmitriyt.networkscanner.data.repository.NetworkRepository
+import ru.dmitriyt.networkscanner.domain.model.NetInterface
+import ru.dmitriyt.networkscanner.domain.repository.NetworkRepository
 import ru.dmitriyt.networkscanner.domain.usecase.base.UseCaseUnary
 import javax.inject.Inject
 

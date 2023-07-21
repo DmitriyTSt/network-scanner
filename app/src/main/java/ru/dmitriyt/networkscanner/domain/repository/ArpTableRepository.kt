@@ -1,4 +1,4 @@
-package ru.dmitriyt.networkscanner.data.repository
+package ru.dmitriyt.networkscanner.domain.repository
 
 interface ArpTableRepository {
     /**

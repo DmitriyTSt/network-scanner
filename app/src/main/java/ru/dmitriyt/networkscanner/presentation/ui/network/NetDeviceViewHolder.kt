@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import ru.dmitriyt.networkscanner.R
-import ru.dmitriyt.networkscanner.data.model.NetDevice
+import ru.dmitriyt.networkscanner.domain.model.NetDevice
 import ru.dmitriyt.networkscanner.databinding.ItemNetworkDeviceBinding
 import ru.dmitriyt.networkscanner.presentation.extensions.inflate
 
