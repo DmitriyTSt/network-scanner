@@ -32,17 +32,30 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
-    protected fun <T> MutableLiveData<LoadableState<T>>.launchLoadData(
-        block: suspend () -> T,
-    ): Job = viewModelScope.launch {
-        flow {
-            emit(LoadableState.Loading())
+    private fun <T> loadData(block: suspend () -> T): Flow<LoadableState<T>> {
+        return flow {
             try {
+                emit(LoadableState.Loading())
                 emit(LoadableState.Success(block()))
             } catch (t: Throwable) {
                 emit(LoadableState.Error(t))
             }
-        }.collect {
+        }
+    }
+
+    protected fun <UiModel, DomainModel> MutableLiveData<LoadableState<UiModel>>.launchLoadData(
+        uiMapper: (DomainModel) -> UiModel,
+        block: suspend () -> DomainModel,
+    ): Job = viewModelScope.launch {
+        loadData { uiMapper(block()) }.collect {
+            this@launchLoadData.postValue(it)
+        }
+    }
+
+    protected fun <T> MutableLiveData<LoadableState<T>>.launchLoadData(
+        block: suspend () -> T,
+    ): Job = viewModelScope.launch {
+        loadData(block).collect {
             this@launchLoadData.postValue(it)
         }
     }
