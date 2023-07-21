@@ -7,7 +7,7 @@ class NetUnitMapper @Inject constructor() {
     fun macAddressFromByteArray(bytes: ByteArray): String {
         return buildString {
             bytes.forEach {
-                if (length > 0) {
+                if (isNotEmpty()) {
                     append(":")
                 }
                 append("%02x".format(it))

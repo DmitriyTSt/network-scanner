@@ -57,20 +57,14 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ru.dmitriyt.networkscanner.presentation.ui.views.StateViewFlipper
-        android:id="@+id/stateViewFlipper"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingVertical="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_network_device" />
-    </ru.dmitriyt.networkscanner.presentation.ui.views.StateViewFlipper>
+        android:clipToPadding="false"
+        android:paddingVertical="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/item_network_device" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -2,7 +2,7 @@ package ru.dmitriyt.networkscanner.data.scanner
 
 import ru.dmitriyt.networkscanner.data.mapper.NetHostMapper
 import ru.dmitriyt.networkscanner.data.mapper.NetUnitMapper
-import ru.dmitriyt.networkscanner.data.model.NetHost
+import ru.dmitriyt.networkscanner.domain.model.NetHost
 import java.net.InetAddress
 import javax.inject.Inject
 import kotlin.coroutines.resume

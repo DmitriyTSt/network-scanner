@@ -1,12 +1,16 @@
-package ru.dmitriyt.networkscanner.data.model
+package ru.dmitriyt.networkscanner.presentation.model
 
 sealed class LoadableState<T> {
     class Loading<T> : LoadableState<T>()
     class Success<T>(val data: T) : LoadableState<T>()
     class Error<T>(val throwable: Throwable) : LoadableState<T>()
 
+    @Suppress
     val isSuccess by lazy { this is Success }
+
+    @Suppress
     val isError by lazy { this is Error }
+
     val isLoading by lazy { this is Loading }
 
     fun doOnSuccess(block: (T) -> Unit) {

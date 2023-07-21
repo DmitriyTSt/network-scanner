@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
  * It used in RecyclerView Adapters through Dagger's injections
  */
 class DiffUtilCallbackFactory constructor(
-    private val diffUtilItemCallbackFactory: DiffUtilItemCallbackFactory
+    private val diffUtilItemCallbackFactory: DiffUtilItemCallbackFactory,
 ) {
 
     fun <T : Similarable<T>> create(oldList: List<T>, newList: List<T>): DiffUtil.Callback {

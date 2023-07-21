@@ -28,7 +28,7 @@ class ApplicationModule {
 
     @Provides
     fun provideDiffUtilCallbackFactory(
-        diffUtilItemCallbackFactory: DiffUtilItemCallbackFactory
+        diffUtilItemCallbackFactory: DiffUtilItemCallbackFactory,
     ): DiffUtilCallbackFactory {
         return DiffUtilCallbackFactory(diffUtilItemCallbackFactory)
     }

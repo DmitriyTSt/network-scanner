@@ -1,8 +1,9 @@
 package ru.dmitriyt.networkscanner.data.repository
 
 import ru.dmitriyt.networkscanner.data.mapper.NetworkMapper
-import ru.dmitriyt.networkscanner.data.model.NetInterface
 import ru.dmitriyt.networkscanner.di.module.DispatcherProvider
+import ru.dmitriyt.networkscanner.domain.model.NetInterface
+import ru.dmitriyt.networkscanner.domain.repository.NetworkRepository
 import timber.log.Timber
 import java.net.NetworkInterface
 import javax.inject.Inject

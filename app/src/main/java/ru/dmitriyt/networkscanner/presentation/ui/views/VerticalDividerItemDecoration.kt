@@ -19,7 +19,7 @@ class VerticalDividerItemDecoration(
     private var drawable: Drawable,
     private val firstDividerPosition: Int = 0,
     private val shouldDrawFirstDivider: Boolean = false,
-    private val endOffset: Int = 1
+    private val endOffset: Int = 1,
 ) : RecyclerView.ItemDecoration() {
 
     override fun onDraw(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
