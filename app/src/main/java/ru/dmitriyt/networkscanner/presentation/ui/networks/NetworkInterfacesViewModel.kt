@@ -2,6 +2,7 @@ package ru.dmitriyt.networkscanner.presentation.ui.networks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import dagger.hilt.android.lifecycle.HiltViewModel
 import ru.dmitriyt.networkscanner.domain.model.NetInterface
 import ru.dmitriyt.networkscanner.domain.usecase.GetNetInterfacesUseCase
 import ru.dmitriyt.networkscanner.presentation.mapper.NetInterfaceMapper
@@ -10,6 +11,7 @@ import ru.dmitriyt.networkscanner.presentation.model.UiNetInterface
 import ru.dmitriyt.networkscanner.presentation.ui.base.BaseViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class NetworkInterfacesViewModel @Inject constructor(
     private val getNetInterfacesUseCase: GetNetInterfacesUseCase,
     private val destinations: NetworkInterfacesDestinations,

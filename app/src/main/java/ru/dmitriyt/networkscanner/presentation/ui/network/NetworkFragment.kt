@@ -3,18 +3,20 @@ package ru.dmitriyt.networkscanner.presentation.ui.network
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import ru.dmitriyt.networkscanner.R
 import ru.dmitriyt.networkscanner.databinding.FragmentNetworkBinding
 import ru.dmitriyt.networkscanner.domain.model.NetInterface
 import ru.dmitriyt.networkscanner.presentation.extensions.addVerticalDividerItemDecoration
-import ru.dmitriyt.networkscanner.presentation.extensions.appViewModels
 import ru.dmitriyt.networkscanner.presentation.extensions.fitTopInsetsWithPadding
 import ru.dmitriyt.networkscanner.presentation.extensions.getParcelableCompat
 import ru.dmitriyt.networkscanner.presentation.navigation.observeNavigationCommands
 import ru.dmitriyt.networkscanner.presentation.ui.base.BaseFragment
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class NetworkFragment : BaseFragment(R.layout.fragment_network) {
 
     companion object {
@@ -33,7 +35,7 @@ class NetworkFragment : BaseFragment(R.layout.fragment_network) {
     }
 
     private val binding by viewBinding(FragmentNetworkBinding::bind)
-    private val viewModel: NetworkViewModel by appViewModels()
+    private val viewModel: NetworkViewModel by viewModels()
 
     @Inject lateinit var adapter: NetDevicesAdapter
 

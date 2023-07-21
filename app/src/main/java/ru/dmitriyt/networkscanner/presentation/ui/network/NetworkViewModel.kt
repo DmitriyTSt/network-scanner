@@ -3,6 +3,7 @@ package ru.dmitriyt.networkscanner.presentation.ui.network
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -15,6 +16,7 @@ import ru.dmitriyt.networkscanner.presentation.ui.base.BaseViewModel
 import ru.dmitriyt.networkscanner.presentation.ui.base.SingleLiveEvent
 import javax.inject.Inject
 
+@HiltViewModel
 class NetworkViewModel @Inject constructor(
     private val getDevicesUseCase: GetDevicesUseCase,
     private val netDeviceMapper: NetDeviceMapper,
