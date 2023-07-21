@@ -9,6 +9,7 @@ import javax.inject.Inject
 class NetDevicesAdapter @Inject constructor(
     diffUtilItemCallbackFactory: DiffUtilItemCallbackFactory,
 ) : ListAdapter<NetDevice, NetDeviceViewHolder>(diffUtilItemCallbackFactory.create()) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NetDeviceViewHolder {
         return NetDeviceViewHolder(parent)
     }

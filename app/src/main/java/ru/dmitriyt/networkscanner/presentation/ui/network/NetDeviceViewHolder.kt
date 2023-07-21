@@ -11,6 +11,7 @@ import ru.dmitriyt.networkscanner.presentation.extensions.inflate
 class NetDeviceViewHolder(
     parent: ViewGroup,
 ) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_network_device)) {
+
     private val binding by viewBinding(ItemNetworkDeviceBinding::bind)
 
     fun bind(device: NetDevice) = with(binding) {

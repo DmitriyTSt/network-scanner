@@ -14,7 +14,7 @@ import ru.dmitriyt.networkscanner.data.repository.NetworkRepository
 import ru.dmitriyt.networkscanner.data.scanner.IcmpPingScanner
 import ru.dmitriyt.networkscanner.data.scanner.NetBiosScanner
 import ru.dmitriyt.networkscanner.di.module.DispatcherProvider
-import ru.dmitriyt.networkscanner.domain.usecase.base.UseCaseUnary
+import ru.dmitriyt.networkscanner.domain.usecase.base.UseCaseFlow
 import timber.log.Timber
 import java.util.TreeSet
 import javax.inject.Inject
@@ -30,9 +30,9 @@ class GetDevicesUseCase @Inject constructor(
     private val arpTableRepository: ArpTableRepository,
     private val icmpPingScanner: IcmpPingScanner,
     private val netBiosScanner: NetBiosScanner,
-) : UseCaseUnary<GetDevicesUseCase.Params, Flow<List<NetDevice>>>() {
+) : UseCaseFlow<GetDevicesUseCase.Params, List<NetDevice>>() {
 
-    override suspend fun execute(params: Params): Flow<List<NetDevice>> = channelFlow {
+    override suspend operator fun invoke(params: Params): Flow<List<NetDevice>> = channelFlow {
         val prefixLength = params.netInterface.prefixLength
         val network = netUnitMapper.ipv4ToUInt(params.netInterface.networkIpAddress)
         val deviceCount = networkRepository.getAddressCount(prefixLength)

@@ -17,7 +17,7 @@ class NetworkInterfacesViewModel @Inject constructor(
     val netInterfacesLiveData: LiveData<LoadableState<List<NetInterface>>> = _netInterfacesLiveData
 
     fun loadNetInterfaces() {
-        _netInterfacesLiveData.launchLoadData(getNetInterfacesUseCase.executeFlow(Unit))
+        _netInterfacesLiveData.launchLoadData { getNetInterfacesUseCase(Unit) }
     }
 
     fun openNetwork(netInterface: NetInterface.Connected) {

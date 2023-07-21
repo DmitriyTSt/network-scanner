@@ -10,6 +10,7 @@ import ru.dmitriyt.networkscanner.databinding.FragmentNetworkBinding
 import ru.dmitriyt.networkscanner.presentation.extensions.addVerticalDividerItemDecoration
 import ru.dmitriyt.networkscanner.presentation.extensions.appViewModels
 import ru.dmitriyt.networkscanner.presentation.extensions.fitTopInsetsWithPadding
+import ru.dmitriyt.networkscanner.presentation.extensions.getParcelableCompat
 import ru.dmitriyt.networkscanner.presentation.navigation.observeNavigationCommands
 import ru.dmitriyt.networkscanner.presentation.ui.base.BaseFragment
 import javax.inject.Inject
@@ -27,7 +28,7 @@ class NetworkFragment : BaseFragment(R.layout.fragment_network) {
     }
 
     private val netInterface by lazy {
-        arguments?.getParcelable<NetInterface.Connected>(ARGS_KEY)
+        arguments?.getParcelableCompat<NetInterface.Connected>(ARGS_KEY)
             ?: throw IllegalArgumentException("NetworkFragment fail to get args")
     }
 
@@ -45,14 +46,10 @@ class NetworkFragment : BaseFragment(R.layout.fragment_network) {
         setupToolbar()
         setupHeader()
         setupRecyclerView()
-        stateViewFlipper.setRetryMethod { viewModel.loadDevices(netInterface) }
     }
 
     override fun onBindViewModel() = with(viewModel) {
         observeNavigationCommands(this)
-        devicesStateLiveData.observe { state ->
-            binding.stateViewFlipper.setState(state)
-        }
         devicesDataLiveData.observe { devices ->
             adapter.submitList(devices)
             binding.recyclerView.invalidateItemDecorations()

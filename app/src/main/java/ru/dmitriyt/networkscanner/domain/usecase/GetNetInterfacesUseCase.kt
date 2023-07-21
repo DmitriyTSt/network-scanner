@@ -12,7 +12,7 @@ class GetNetInterfacesUseCase @Inject constructor(
     private val networkRepository: NetworkRepository,
 ) : UseCaseUnary<Unit, List<NetInterface>>() {
 
-    override suspend fun execute(params: Unit): List<NetInterface> {
+    override suspend operator fun invoke(params: Unit): List<NetInterface> {
         return networkRepository.getNetInterfaces()
     }
 }
