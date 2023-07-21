@@ -14,12 +14,11 @@ class NetHostMapper @Inject constructor() {
         )
     }
 
-    fun fromHostToDevice(netHost: NetHost, isCurrentDevice: Boolean, mac: String?): NetDevice {
+    fun fromHostToDevice(netHost: NetHost, mac: String?): NetDevice {
         return NetDevice(
             host = netHost.host,
             addressUInt = netHost.addressUInt,
             hostName = netHost.hostName,
-            isCurrentDevice = isCurrentDevice,
             mac = mac,
         )
     }

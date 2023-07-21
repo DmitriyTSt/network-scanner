@@ -11,6 +11,7 @@ import javax.inject.Inject
 class GetNetInterfacesUseCase @Inject constructor(
     private val networkRepository: NetworkRepository,
 ) : UseCaseUnary<Unit, List<NetInterface>>() {
+
     override suspend fun execute(params: Unit): List<NetInterface> {
         return networkRepository.getNetInterfaces()
     }

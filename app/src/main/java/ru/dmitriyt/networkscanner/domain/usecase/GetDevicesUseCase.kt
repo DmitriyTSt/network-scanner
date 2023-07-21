@@ -4,6 +4,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.withContext
 import ru.dmitriyt.networkscanner.data.mapper.NetHostMapper
 import ru.dmitriyt.networkscanner.data.mapper.NetUnitMapper
 import ru.dmitriyt.networkscanner.data.model.NetDevice
@@ -39,36 +40,38 @@ class GetDevicesUseCase @Inject constructor(
         val arpTable = arpTableRepository.getArpTable()
 
         Timber.d("START SCAN ${this.channel}")
-        IntRange(0, deviceCount - 1).map { i ->
-            async(dispatcherProvider.io) {
-                val addressUInt = (network + i.toUInt())
-                if (i == 0 || i == deviceCount - 1) {
-                    // skip
-                } else {
-                    val netHostIcmp = icmpPingScanner.getDeviceByIcmp(addressUInt)
-                    val netHostNetBios = netBiosScanner.getDeviceByNetBios(addressUInt)
-                    val netHost = (netHostIcmp ?: netHostNetBios)
-                        ?.copy(hostName = netHostNetBios?.hostName ?: netHostIcmp?.hostName)
-                    if (netHost != null) {
-                        val isCurrentDevice = netHost.host == params.netInterface.currentDevice.host
-                        val device = if (isCurrentDevice) {
-                            params.netInterface.currentDevice
-                        } else {
-                            netHostMapper.fromHostToDevice(
-                                netHost = netHost,
-                                isCurrentDevice = isCurrentDevice,
-                                mac = arpTable[netHost.host]
-                            )
-                        }
-                        devices.add(device)
+        withContext(dispatcherProvider.io) {
+            IntRange(0, deviceCount - 1).map { i ->
+                async {
+                    val addressUInt = (network + i.toUInt())
+                    if (i == 0 || i == deviceCount - 1) {
+                        // skip
+                    } else {
+                        val netHostIcmp = icmpPingScanner.getDeviceByIcmp(addressUInt)
+                        val netHostNetBios = netBiosScanner.getDeviceByNetBios(addressUInt)
+                        val netHost = (netHostIcmp ?: netHostNetBios)
+                            ?.copy(hostName = netHostNetBios?.hostName ?: netHostIcmp?.hostName)
+                        if (netHost != null) {
+                            val isCurrentDevice = netHost.host == params.netInterface.currentDevice.host
+                            val device = if (isCurrentDevice) {
+                                params.netInterface.currentDevice
+                            } else {
+                                netHostMapper.fromHostToDevice(
+                                    netHost = netHost,
+                                    mac = arpTable[netHost.host]
+                                )
+                            }
+                            devices.add(device)
 
-                        if (!isClosedForSend) {
-                            send(devices.toList())
+                            if (!isClosedForSend) {
+                                send(devices.toList())
+                            }
                         }
                     }
                 }
-            }
-        }.awaitAll()
+            }.awaitAll()
+        }
+        Timber.d("END_SCAN")
         val newArpTable = arpTableRepository.getArpTable()
         if (!isClosedForSend) {
             send(
@@ -83,7 +86,6 @@ class GetDevicesUseCase @Inject constructor(
                 }
             )
         }
-        Timber.d("END_SCAN")
     }
 
     data class Params(
